@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <title>HOME</title>
+    <script>
+        function goHome() {
+            location.href = "{% url 'nmovie:index' %}";
+        }
+        function sendKakao() {
+            location.href = "{% url 'nmovie:kakao' %}"
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-header">
+                <h1><a href="{% url 'nmovie:index' %}" class="navbar-brand">HOME</a></h1>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <div class="container">
+            {% if posPercent >= 0 and posPercent < 25 %}
+                <h1 class="display-3">노잼!</h1>
+            {% elif posPercent >= 25 and posPercent < 75 %}
+                <h1 class="display-3">볼까? 말까?</h1>
+            {% elif posPercent >= 75 and posPercent < 100 %}
+                <h1 class="display-3">어머! 이건 꼭 사야 해!</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="container">
+            {% if posPercent >= 0 and posPercent < 25 %}
+                <h2 class="display-3">으헝헝 노잼! 이걸 보느니 차라리 아무것도 안하고 말지...!!!!</h2>
+            {% elif posPercent >= 25 and posPercent < 75 %}
+                {% if 25 <= posPercent < 50 %}
+                    <h2>관람객의 의견은  {% if posPercent >= 25 and posPercent < 35 %}대체로{% endif %} 부정적인 편입니다.....</h2>
+                {% else %}
+                    <h2>관람객의 의견은  {% if posPercent >= 65 and posPercent < 75 %}대체로{% endif %} 긍정적인 편입니다~</h2>
+                {% endif %}
+            {% elif posPercent >= 75 and posPercent < 100 %}
+                <h2 class="display-3">꼭 보세요! 무조건 보세요!</h2>
+            {% endif %}
+            <br>
+            {% if posPercent >= 0 and posPercent < 25 %}
+                <img src="{% static 'img/jo.jpg' %}" />
+            {% elif posPercent >= 25 and posPercent < 75 %}
+                <img src="{% static 'img/gomin.png' %}" />
+            {% elif posPercent >= 75 and posPercent < 100 %}
+                <img src="{% static 'img/wow.jpg' %}" />
+            {% endif %}
+            <p><hr><p>
+            <h4>긍정적인 의견 : {{posPercent}}%</h4>
+            <br><br>
+            <h5>이 영화를 시청한 사람들의 평점입니다.</h5>
+            {% for star in ratingStar %}
+                <h3>{{star}}</h3>
+            {% endfor %}
+            <br><br>
+            <p><hr><p>
+            <br><br>
+            <h5>관람객들의 리뷰에 가장 많이 등장한 단어들입니다.</h5>
+            <img src="{% static 'img/result_wordcloud.jpg' %}" />
+            <br><br>
+            <p><hr><p>
+            <br><br>
+            <button class="btn btn-secondary" onclick="goHome()">홈으로 돌아가기</button>
+            <button class="btn btn-warning" onclick="sendKakao()">카카오톡 전송</button>
+        </div>
+    </div>
+</body>
+</html>

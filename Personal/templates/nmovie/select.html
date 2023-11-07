@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <title>HOME</title>
+    <style>
+        .solid{width:620px; height:500px; overflow:scroll; border:5px solid gray; padding:5px 5px 5px 5px;}
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-header">
+                <h1><a href="{% url 'nmovie:index' %}" class="navbar-brand">HOME</a></h1>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">검색 결과</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container">
+            <div class="solid">
+                {% for movie in movie_list %}
+                    <h5>{{forloop.counter}}.&nbsp;{{movie}}</h5><br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container">
+            <br>
+            <h4>원하시는 번호를 입력해주세요.</h4>
+        </div>
+        <br><br><br><br>
+        <div class="container">
+            <form class="form" action="{% url 'nmovie:selected' %}" method="get" enctype="utf-8">
+                <div class="form-group row">
+                    <label class="col-sm-2"><strong>번호</strong></label>
+                    <div class="col-sm-3">
+                        <input type="text" name="select" class="form-control" />
+                    </div>
+                </div>
+                <br><br>
+                <div class="form-group row">
+                    <label class="col-sm-2"></label>
+                    <div class="col-sm-3">
+                        <input type="submit" value="선택" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+            
+    </div>
+</body>
+</html>

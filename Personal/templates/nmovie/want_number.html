@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <title>Choice numbers!</title>
+</head>
+<body>
+    <div class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-header">
+                <h1><a href="{% url 'nmovie:index' %}" class="navbar-brand">HOME</a></h1>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Choice numbers!</h1>
+        </div>
+    </div>
+    <div class="container">
+        <h3>총 {{total}}건의 리뷰를 찾았습니다.</h3><br>
+        <h4>몇 건의 리뷰를 수집하시겠습니까? (더 많은 리뷰를 수집하실수록 예측 정확도가 향상됩니다.)</h4>
+        <br><br>
+        <form class="form" action="{% url 'nmovie:collect' %}" method="get" encType="utf-8">
+            <div class="container">
+                <div class="form-group row">
+                    <label class="col-sm-2"><strong>수집 갯수</strong></label>
+                    <div class="col-sm-3">
+                        <input type="text" name="nums" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="form-group row">
+                    <label class="col-sm-2"></label>
+                    <div class="col-sm-3">
+                        <input type="submit" class="btn btn-primary" value="검색" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

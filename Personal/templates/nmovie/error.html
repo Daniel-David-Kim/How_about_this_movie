@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <title>HOME</title>
+    <script>
+        function goHome() {
+            location.href = "{% url 'nmovie:index' %}";
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-header">
+                <h1><a href="{% url 'nmovie:index' %}" class="navbar-brand">HOME</a></h1>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">오류가 발생했습니다.....</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="container">
+            <h2 style="color:red;">{{error_msg}}</h2>   
+        </div>
+        <br><br><br><br>
+        <div class="container">
+            <button class="btn btn-secondary" onclick="goHome()">홈으로 돌아가기</button>
+        </div>
+    </div>
+</body>
+</html>
